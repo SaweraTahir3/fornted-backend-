@@ -1,47 +1,53 @@
 import React, { useState } from "react";
 import "./signup.css";
 import { Link, useNavigate } from "react-router-dom";
-import signupImage from '../../Components/Images/smit.png'
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
-    const [Register, setRegister] = useState({
+  const [Register, setRegister] = useState({
     name: "",
-    email:"" ,
-    password:""
-    })
-    let navigate = useNavigate()
-    const [ registerMessage , setRegisterMessage] = useState("")
-    
-    const handleRegisterChange = (event) => {
-        
-        setRegister({
-            ...Register,
-            [event.target.name]: event.target.value})
-    }
-    const handleRegister = async (event) => {
-    event.preventDefault();
-try {
-    let response = await axios.post("http://localhost:4000/api/signup",Register)
+    email: "",
+    password: ""
+});
+let navigate = useNavigate();
+const [registerMessage, setRegisterMessage] = useState("");
 
-
-  setRegisterMessage(response.data.message)
-
-  setRegister({
-    name: "",
-    email:"" ,
-    password:""
-  })
-  navigate ("/login")
-} catch (error) {
-    setRegisterMessage(error.response.data.message)
+const handleRegisterChange = (event) => {
+    setRegister({
+        ...Register,
+        [event.target.name]: event.target.value
+    });
 }
 
-    }
+const handleRegister = async (event) => {
+  event.preventDefault();
+  try {
+      let response = await axios.post("http://localhost:5000/api/auth/signup", Register);
+
+      setRegisterMessage(response.data.message);
+      toast.success(response.data.message); // Show success message from response
+
+      setRegister({
+          name: "",
+          email: "",
+          password: ""
+      });
+      navigate("/login");
+  } catch (error) {
+      if (error.response && error.response.data && error.response.data.message) {
+          setRegisterMessage(error.response.data.message);
+          toast.error(error.response.data.message); // Show error message from response
+      } else {
+          toast.error("An unexpected error occurred. Please try again.");
+      }
+  }
+}
 
   return (
     <div className="signupPage" >
-      <img src={signupImage}alt="Sign Up" className="signupImage" />
+      <img alt="Sign Up" className="signupImage" />
       <div className="addUser">
         <h3>Sign Up</h3>
         <form onSubmit={handleRegister} className="addUserForm" action="" >
@@ -87,8 +93,8 @@ try {
         </div>
       </div>
       
-    
     </div>
+    
   );
 };
 
