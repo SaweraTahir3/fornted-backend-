@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
-// import logo from '../assets/smit-logo.png';
+import logo from './smit.png';
 
 const theme = createTheme({
   typography: {
@@ -31,10 +31,11 @@ const FirstPage = () => {
   return (
     <ThemeProvider theme={theme}>
       <Box display="flex" flexDirection="column" minHeight="100vh">
-        <AppBar position="static" style={{ backgroundColor: " white" }}>
-          <Toolbar>
+        <AppBar position="static" >
+          <Toolbar sx={{ backgroundColor: "white" }}>
             <img
               alt="SMIT Logo"
+              src={logo}
               style={{ height: "108px", marginRight: "19px" }}
             />
 
@@ -49,16 +50,17 @@ const FirstPage = () => {
 
         <Container
           maxWidth="md"
-          style={{
+          sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             flexGrow: 1,
             textAlign: "center",
+            mt:" 5rem",
           }}
         >
-          <div className="part">
+          {/* <div className="part"> */}
             <Box mt={1}>
               <Typography
                 variant="h4"
@@ -115,16 +117,13 @@ const FirstPage = () => {
               running under Saylani Welfare Trust Management.
               {/* Saylani Mass IT Training program is an institute that delivers the latest IT education (FREE OF COST). */}
             </Typography>
-            <Box mt={4}>
+            <Box mt={4} sx={{ display: "flex", flexDirection: "row", gap: 2}}>
               <Button
                 component={Link}
                 to="/signup"
                 variant="contained"
                 color="primary"
-                style={{
-                  marginRight: "16px",
-                  backgroundColor: "blue !important",
-                }}
+               
               >
                 Student Portal
               </Button>
@@ -132,12 +131,11 @@ const FirstPage = () => {
               <Button
                 variant="contained"
                 color="primary"
-                style={{ backgroundColor: "blue" }}
               >
                 Admin Portal
               </Button>
             </Box>
-          </div>
+          {/* </div> */}
         </Container>
       </Box>
     </ThemeProvider>
