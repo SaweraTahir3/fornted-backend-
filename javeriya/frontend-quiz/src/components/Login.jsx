@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import  { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-// import LoginImage from '../../Components/Images/smit.png'
+import LoginImage from './smit.png'
 import './login.css'
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -49,7 +49,7 @@ let navigate = useNavigate()
  
   return (
     <div className="loginPage d-flex justify-content-align-item-center bg-primary vh-100">
-      <img  alt="Login" className="loginImage" />
+      <img src={LoginImage} alt="Login" className="loginImage" />
       <div className="addUser bg-white p-3 rounded w-25">
         <h3>Login</h3>
         <form onSubmit={handleSubmit}  className="addUserForm" >

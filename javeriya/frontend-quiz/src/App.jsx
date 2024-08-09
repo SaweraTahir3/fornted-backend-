@@ -10,9 +10,13 @@ import FirstPage from './components/FirstPage';
 import Signup from './components/Signup';
 import AuthGuard from "./components/privateroute";
 import { ToastContainer } from "react-toastify";
+import { ThemeProvider } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 
 const App = () => {
+  const theme =useTheme();
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <Routes>
         <Route path="/" element={<FirstPage />} />
@@ -28,6 +32,7 @@ const App = () => {
       </Routes>
       <ToastContainer />
     </Router>
+    </ThemeProvider>
   );
 };
 

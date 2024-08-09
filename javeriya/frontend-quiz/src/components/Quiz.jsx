@@ -228,7 +228,7 @@ const Quiz = () => {
                 </Box>
                 <MuiLink
                   component={Link}
-                  to="/"
+                  to="/start"
                   underline="none"
                   sx={{
                     backgroundColor: '#0D6DB7',
