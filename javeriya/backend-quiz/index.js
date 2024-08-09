@@ -22,7 +22,6 @@ app.use('/api/questions', questionsRouter);
 app.use('/api/results', resultsRouter);
 app.use('/api/auth', authRouter);
 
-app.use(express.json());
 
 // app.use(session({
 //   secret: 'your-secret-key',

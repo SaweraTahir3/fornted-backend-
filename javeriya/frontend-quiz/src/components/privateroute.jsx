@@ -1,16 +1,25 @@
-import React from "react";
-import { Route, Navigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-const PrivateRoute = ({ element: Component, ...rest }) => {
-    const isAuthenticated = !!Cookies.get('token'); // Check if token exists
+const AuthGuard = ({ component }) => {
+  const [status, setStatus] = useState(false);
+  const navigate = useNavigate();
 
-    if (!isAuthenticated) {
-        toast.error("Please log in to access this page");
-        return <Navigate to="/login" />;
+  useEffect(() => {
+    checkToken();
+  }, [component]);
+
+  const checkToken = () => {
+    const tokenExists = !!Cookies.get('token'); // Check if token exists
+    if (!tokenExists) {
+      navigate(`/login`);
+    } else {
+      setStatus(true);
     }
+  };
 
-    return <Route {...rest} element={Component} />;
+  return status ? <>{component}</> : null;
 };
-export default PrivateRoute;
+
+export default AuthGuard;

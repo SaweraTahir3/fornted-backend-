@@ -5,7 +5,7 @@ const User = require('../models/Users');
 const passport = require('passport');
 var jwt = require("jsonwebtoken");
 // const bodyParser = require("body-parser");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 var validator = require("email-validator");
 
 router.post("/signup", async (req, res) => {
@@ -64,7 +64,9 @@ router.post("/login", async (req, res) => {
         }
 
         // Validate password
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+        console.log(isPasswordValid);
+        
 
         if (!isPasswordValid) {
             return res.status(400).json({ message: "Invalid email or password" });

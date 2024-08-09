@@ -4,11 +4,11 @@ import Quiz from './components/Quiz';
 import Result from './components/Result';
 import Admindashboard from './components/Admindashboard';
 import CourseSelection from './components/CourseSelection';
-import Startpage from './components/Startpage'
+import Startpage from './components/Startpage';
 import Login from './components/Login';
 import FirstPage from './components/FirstPage';
 import Signup from './components/Signup';
-import PrivateRoute from "./components/privateroute";
+import AuthGuard from "./components/privateroute";
 import { ToastContainer } from "react-toastify";
 
 const App = () => {
@@ -18,21 +18,17 @@ const App = () => {
         <Route path="/" element={<FirstPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        
-        {/* Private Routes */}
-        <Route path="/courseSelection" element={<PrivateRoute element={<CourseSelection />} />} />
-        <Route path="/quiz" element={<PrivateRoute element={<Quiz />} />} />
-        <Route path="/result" element={<PrivateRoute element={<Result />} />} />
-        <Route path="/admin" element={<PrivateRoute element={<Admindashboard />} />} />
-        <Route path="/start" element={<PrivateRoute element={<Startpage />} />} />
+
+        {/* Protected Routes */}
+        <Route path="/courseSelection" element={<AuthGuard component={<CourseSelection />} />} />
+        <Route path="/quiz" element={<AuthGuard component={<Quiz />} />} />
+        <Route path="/result" element={<AuthGuard component={<Result />} />} />
+        <Route path="/admin" element={<AuthGuard component={<Admindashboard />} />} />
+        <Route path="/start" element={<AuthGuard component={<Startpage />} />} />
       </Routes>
-      <ToastContainer /> {/* Add ToastContainer here */}
+      <ToastContainer />
     </Router>
   );
 };
 
-
 export default App;
-
-
-
